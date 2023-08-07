@@ -1,10 +1,7 @@
-export default async function events(
-  req: { body: { type: string; challenge: string } },
-  res: {
-    send: (message: string) => void
-    status: (code: number) => { send: (message: { challenge: string }) => void }
-  },
-) {
+import SlackRequest from '../types/SlackRequest'
+import SlackResponse from '../types/SlackResponse'
+
+export default async function events(req: SlackRequest, res: SlackResponse) {
   const type = req.body.type
 
   if (type == 'url_verification') {
@@ -12,6 +9,7 @@ export default async function events(
       challenge: req.body.challenge,
     })
   } else if (type == 'event_callback') {
-    console.log(req.body)
+    res.status(200).send()
+    console.log(req.body.event.text)
   }
 }
