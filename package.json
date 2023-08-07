@@ -28,6 +28,9 @@
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "ci": "yarn typecheck && yarn lint && yarn test"
   }
 }
