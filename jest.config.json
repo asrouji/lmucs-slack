@@ -1,7 +1,7 @@
 {
   "testEnvironment": "node",
   "roots": [
-    "<rootDir>/src",
+    "<rootDir>/api",
     "<rootDir>/test"
   ],
   "testMatch": [
@@ -13,17 +13,14 @@
   },
   "moduleDirectories": [
     "node_modules",
-    "src"
+    "api"
   ],
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**/*.{js,ts}"
+    "api/**/*.{js,ts}"
   ],
   "coveragePathIgnorePatterns": [
     "/node_modules/",
-    "/test/",
-    "/src/scripts/",
-    "/src/types/",
-    "/src/util/constants"
+    "/test/"
   ]
 }
