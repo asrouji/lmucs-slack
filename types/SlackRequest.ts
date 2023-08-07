@@ -11,7 +11,7 @@ type SlackRequest = {
       text: string
       user: string
       ts: string
-      blocks: any[]
+      blocks: unknown[]
       channel: string
       event_ts: string
       channel_type: string
