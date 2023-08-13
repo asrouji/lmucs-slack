@@ -1,5 +1,5 @@
-import SlackRequest from '../types/SlackRequest'
-import SlackResponse from '../types/SlackResponse'
+import SlackRequest from '../types/slackRequest'
+import SlackResponse from '../types/slackResponse'
 
 export default async function events(req: SlackRequest, res: SlackResponse) {
   const type = req.body.type
@@ -10,6 +10,6 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
     })
   } else if (type == 'event_callback') {
     res.status(200).send()
-    console.log(req.body.event.text)
+    console.log(req.body)
   }
 }
