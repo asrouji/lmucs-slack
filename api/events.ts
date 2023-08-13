@@ -18,7 +18,7 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       const messageContent = req.body.event.text
       const userId = req.body.event.user
       const channelId = req.body.event.channel
-      const timestamp = req.body.event.ts
+      const timestamp = req.body.event.event_ts
 
       try {
         const response = (await fetch(`https://slack.com/api/users.profile.get?user=${userId}`, {
