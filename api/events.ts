@@ -15,6 +15,8 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       const message = req.body.event.text
       const userId = req.body.event.user
 
+      console.log(`User ID: ${userId} ${req.body.authorizations.map(auth => auth.user_id).join(', ')}`)
+
       try {
         const response = (await fetch('https://slack.com/api/users.profile.get', {
           method: 'GET',
@@ -31,9 +33,6 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
             real_name: string
           }
         }
-
-        console.log(data)
-
         console.log(`Message from "${data.profile.real_name}": "${message}"`)
       } catch (error) {
         console.error(error)
