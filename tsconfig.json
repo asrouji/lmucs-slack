@@ -16,7 +16,8 @@
     "useUnknownInCatchVariables": true,
   },
   "include": [
-    "api/**/*"
+    "api/**/*",
+    "util/**/*",
   ],
   "exclude": [
     "node_modules"
