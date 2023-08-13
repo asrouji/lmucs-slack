@@ -36,10 +36,6 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
 
         const calendarUpdateResult = await updateTutoringSessionDescription(tutorName, messageContent)
 
-        if (!calendarUpdateResult) {
-          return res.status(500).send()
-        }
-
         console.log(`Ready to react in channel ${channelId} at timestamp ${timestamp}`)
 
         // react to the message with a checkmark
@@ -51,7 +47,7 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
           },
           body: JSON.stringify({
             channel: channelId,
-            name: 'white_check_mark',
+            name: calendarUpdateResult ? 'white_check_mark' : 'question',
             timestamp: timestamp,
           }),
         })
