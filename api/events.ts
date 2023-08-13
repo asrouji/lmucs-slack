@@ -9,7 +9,8 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       challenge: req.body.challenge,
     })
   } else if (type == 'event_callback') {
-    res.status(200).send()
+    console.log(req.body.event.type)
+
     if (req.body.event.type === 'message') {
       const message = req.body.event.text
       const userId = req.body.event.user
@@ -35,4 +36,6 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       console.log(`Message from "${data.user.profile.real_name}": "${message}"`)
     }
   }
+
+  res.status(200).send()
 }
