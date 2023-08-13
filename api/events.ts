@@ -57,7 +57,7 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       }
     }
 
-    res.status(200).send()
+    res.status(200).send(`received message ${req.body.event.text}`)
   }
 }
 
