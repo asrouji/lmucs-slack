@@ -43,16 +43,18 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
         console.log(`Ready to react in channel ${channelId} at timestamp ${timestamp}`)
 
         // react to the message with a checkmark
-        const reactionResponse = await fetch(
-          `https://slack.com/api/reactions.add?channel=${channelId}&name=white_check_mark&timestamp=${timestamp}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-            },
+        const reactionResponse = await fetch(`https://slack.com/api/reactions.add`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`,
           },
-        )
+          body: JSON.stringify({
+            channel: channelId,
+            name: 'white_check_mark',
+            timestamp: timestamp,
+          }),
+        })
 
         if (!reactionResponse.ok) {
           console.error(await reactionResponse.text())
