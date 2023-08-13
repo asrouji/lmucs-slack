@@ -1,6 +1,6 @@
 import events from '../api/events'
-import SlackRequest from '../types/SlackRequest'
-import SlackResponse from '../types/SlackResponse'
+import SlackRequest from '../types/slackRequest'
+import SlackResponse from '../types/slackResponse'
 
 describe('challenge', () => {
   test('returns the slack challenge', async () => {
@@ -13,7 +13,7 @@ describe('challenge', () => {
     const res = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
-    } as SlackResponse
+    } as unknown as SlackResponse
     await events(req, res)
     expect(res.status).toHaveBeenCalledWith(200)
     expect(res.send).toHaveBeenCalledWith({ challenge: 'test-challenge' })
