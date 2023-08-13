@@ -40,6 +40,8 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
           return res.status(500).send()
         }
 
+        console.log(`Ready to react in channel ${channelId} at timestamp ${timestamp}`)
+
         // react to the message with a checkmark
         const reactionResponse = await fetch(
           `https://slack.com/api/reactions.add?channel=${channelId}&name=white_check_mark&timestamp=${timestamp}`,
@@ -54,7 +56,6 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
 
         if (!reactionResponse.ok) {
           console.error(await reactionResponse.text())
-          return res.status(500).send('Failed to react to message')
         }
       } catch (error) {
         console.error(error)
