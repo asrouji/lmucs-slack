@@ -36,6 +36,6 @@
     "lint": "eslint . --ext .ts",
     "ci": "yarn typecheck && yarn lint && yarn test",
     "vercel": "npx vercel dev",
-    "build": "npx babel api --out-dir dist --extensions \".ts\" --copy-files"
+    "build": "npx babel api --out-dir public --extensions \".ts\" --copy-files"
   }
 }
