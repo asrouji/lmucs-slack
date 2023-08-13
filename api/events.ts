@@ -12,10 +12,13 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
     console.log(req.body.event.type)
 
     if (req.body.event.type === 'message') {
-      const message = req.body.event.text
-      const userId = req.body.event.user
+      if (req.body.authorizations.length === 0 || req.body.authorizations[0].is_bot) {
+        console.log('Message from bot, ignoring')
+        return res.status(200).send()
+      }
 
-      console.log(`User ID: ${userId} ${req.body.authorizations.map(auth => auth.user_id).join(', ')}`)
+      const message = req.body.event.text
+      const userId = req.body.authorizations[0].user_id
 
       try {
         const response = (await fetch('https://slack.com/api/users.profile.get', {
