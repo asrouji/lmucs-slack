@@ -15,16 +15,24 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
       const message = req.body.event.text
       const userId = req.body.event.user
 
-      const response = await fetch('https://slack.com/api/users.profile.get', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-          'user': userId,
-        },
-      })
+      let response: { json: () => Promise<SlackResponse> } = { json: async () => ({ ok: false }) } as unknown as {
+        json: () => Promise<SlackResponse>
+      }
 
-      const data = (await response.json()) as {
+      try {
+        response = (await fetch('https://slack.com/api/users.profile.get', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+            'user': userId,
+          },
+        })) as unknown as { json: () => Promise<SlackResponse> }
+      } catch (error) {
+        console.error(error)
+      }
+
+      const data = (await response.json()) as unknown as {
         ok: boolean
         user: {
           profile: {
@@ -32,6 +40,8 @@ export default async function events(req: SlackRequest, res: SlackResponse) {
           }
         }
       }
+
+      console.log(data)
 
       console.log(`Message from "${data.user.profile.real_name}": "${message}"`)
     }
