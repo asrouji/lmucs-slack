@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { updateTutoringSessionDescription } from '../api/util/calendar'
+import { updateTutoringSessionDescription } from '../api/_calendar'
 
 const date = DateTime.fromObject(
   {
