@@ -17,7 +17,6 @@
   },
   "include": [
     "api/**/*",
-    "util/**/*",
   ],
   "exclude": [
     "node_modules"

@@ -1,6 +1,6 @@
 import SlackRequest from '../types/slackRequest'
 import SlackResponse from '../types/slackResponse'
-import { updateTutoringSessionDescription } from '../util/calendar'
+import { updateTutoringSessionDescription } from './util/calendar'
 
 export default async function events(req: SlackRequest, res: SlackResponse) {
   const type = req.body.type
